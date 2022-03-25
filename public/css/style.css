@@ -1,0 +1,165 @@
+.note-container, 
+.coin-container,
+.cent-container {
+  width: 100%;
+  /*border: 1px solid #666666;*/
+}
+
+.add-button-container {
+  /*border: 1px solid #666666;*/
+  margin-bottom: 30px;
+}
+
+.note-item,
+.coin-item,
+.cent-item {
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  padding-top: 10px;
+  padding-left: 8px;
+}
+
+.note-cells-row-1,
+.note-cells-row-2, 
+.coin-cells-row-1,
+.coin-cells-row-2, 
+.cent-cells-row-1,
+.cent-cells-row-2 {
+  display: table-cell;
+  padding-bottom: 10px;
+  padding-right: 15px;
+  width: 25%;
+  /*border: 1px solid #ddd;*/
+}
+
+.note-cells-row-1, 
+.coin-cells-row-1, 
+.cent-cells-row-1 {
+  padding-bottom: 20px;
+}
+
+.note-cell-2-row-2,
+.note-cell-4-row-2, 
+.coin-cell-2-row-2,
+.coin-cell-4-row-2, 
+.cent-cell-2-row-2,
+.cent-cell-4-row-2 {
+  text-align: center;
+}
+
+.note-cell-1-row-2, 
+.coin-cell-1-row-2, 
+.cent-cell-1-row-2 {
+  width: 18%;
+}
+
+.note-cell-2-row-2, 
+.coin-cell-2-row-2, 
+.cent-cell-2-row-2 {
+  width: 10%;
+}
+
+.note-cell-3-row-2 {
+  width: 40%;
+}
+
+.note-cell-4-row-2 {
+  width: 40%;
+}
+
+.datetime-field {
+  width: 40%;
+  float: left;
+  margin-right: 10px;
+}
+
+.note-order-number {
+  width: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 15%;
+  border-color: #d4d4d4;
+  background-color: #ebebeb;
+}
+
+.ordering-div {
+  float: right;
+}
+
+.first-item {
+  margin-right: 16px;
+}
+
+.last-item {
+  margin-left: 16px;
+}
+
+.mandatory {
+  border: 1px solid #9d261d !important;
+  background-color: #f2dede !important;
+}
+
+.item-label,
+.item-space {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.item-space {
+  display: block;
+}
+
+.note-pagination-inactive {
+  display: none;
+}
+
+.note-pagination-browser {
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.note-pagination-browser .current-page-number,
+.note-pagination-browser .page-number {
+  border: 1px solid #ddd;
+}
+
+.note-pagination-browser td {
+  padding: 5px;
+  margin: 5px;
+}
+
+div[class$='-odd'] {
+  background-color: #f1f7ff;
+}
+
+div[class$='-even'] {
+  background-color: #fff;
+}
+
+.radio-option {
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+.clear-btn {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  margin-right: -1px !important;
+}
+
+.select-btn {
+  float: left;
+  margin-right: 15px;
+}
+
+.selected-item-name {
+  width: 200px;
+}
+
+.select2-container {
+  width: 439.35px !important;
+}
