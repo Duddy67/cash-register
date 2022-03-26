@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('operations', function (Blueprint $table) {
             $table->id();
             $table->string('type', 20);
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->timestamp('entry_date')->nullable();
             $table->bigInteger('total')->unsigned();
             $table->timestamps();

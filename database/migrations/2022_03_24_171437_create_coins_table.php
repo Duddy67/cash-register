@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('operation_id')->unsigned();
             $table->tinyInteger('numeral')->unsigned();
             $table->smallInteger('quantity')->unsigned();
-            $table->integer('sub_total')->unsigned();
             $table->timestamps();
         });
     }
