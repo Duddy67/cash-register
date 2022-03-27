@@ -182,7 +182,7 @@ CRepeater = (function () {
             // Calls a callback function to execute possible tasks before the item deletion.
             // N.B: Check first that the function has been defined. 
             if (typeof window['beforeRemoveItem'] === 'function') {
-                window['beforeRemoveItem'](idNb, this.itemType);
+                window['beforeRemoveItem'](idNb, this._itemType);
             }
 
             // Removes the item from its div id.
@@ -214,7 +214,7 @@ CRepeater = (function () {
             // Calls a callback function to execute possible tasks after the item deletion.
             // N.B: Check first that the function has been defined. 
             if (typeof window['afterRemoveItem'] === 'function') {
-                window['afterRemoveItem'](idNb, this.itemType);
+                window['afterRemoveItem'](idNb, this._itemType);
             }
         },
 

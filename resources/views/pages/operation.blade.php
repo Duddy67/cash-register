@@ -39,7 +39,7 @@
               </div>
           </div>
           <div class="col-4">
-              <div id="operation-total" class="h1 total">{{ (isset($total)) ? $total : 0 }} E</div>
+              <div class="h1"><span id="operation-total">{{ (isset($total)) ? $total : 0 }}</span> E</div>
           </div>
     </div>
 
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="col-4">
-            <div id="note-subtotal" class="h1 subtotal">0 E</div>
+            <div class="h1"><span id="note-subtotal">0</span> E</div>
         </div>
     </div>
 
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="col-4">
-            <div id="coin-subtotal" class="h1 subtotal">0 E</div>
+            <div class="h1"><span id="coin-subtotal">0</span> E</div>
         </div>
     </div>
 
@@ -84,17 +84,20 @@
             </div>
         </div>
         <div class="col-4">
-            <div id="cent-subtotal" class="h1 subtotal">0 E</div>
+            <div class="h1"><span id="cent-subtotal">0</span> E</div>
         </div>
     </div>
 
-    <input type="submit" value="Enregistrer" />
+    @php $label = 'Enregistrer'; @endphp
 
     @if (isset($operation))
         <input type="hidden" id="note_data" value="{{ json_encode($operation->notes()->select('numeral', 'quantity')->get()->toArray()) }}" />
         <input type="hidden" id="coin_data" value="{{ json_encode($operation->coins()->select('numeral', 'quantity')->get()->toArray()) }}" />
         <input type="hidden" id="cent_data" value="{{ json_encode($operation->cents()->select('numeral', 'quantity')->get()->toArray()) }}" />
+        @php $label = 'Mettre à jour'; @endphp
     @endif
+
+    <input type="submit" class="btn btn-success mt-5" value="{{ $label }}" />
 </form>
 
 </div>

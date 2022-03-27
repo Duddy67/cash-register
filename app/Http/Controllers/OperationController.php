@@ -42,9 +42,9 @@ class OperationController extends Controller
     public function store(Request $request)
     {
         // Get the different currency parts.
-        $notes = $this->parseCurrency($request, 'note');
-        $coins = $this->parseCurrency($request, 'coin');
-        $cents = $this->parseCurrency($request, 'cent');
+        $notes = $this->parseCurrencyItem($request, 'note');
+        $coins = $this->parseCurrencyItem($request, 'coin');
+        $cents = $this->parseCurrencyItem($request, 'cent');
         // Get the total of the operation (in cents).
         $total = $this->getTotal($notes, $coins, $cents);
 
@@ -112,9 +112,9 @@ class OperationController extends Controller
     public function update(Request $request, $id)
     {
         // Get the different currency parts.
-        $notes = $this->parseCurrency($request, 'note');
-        $coins = $this->parseCurrency($request, 'coin');
-        $cents = $this->parseCurrency($request, 'cent');
+        $notes = $this->parseCurrencyItem($request, 'note');
+        $coins = $this->parseCurrencyItem($request, 'coin');
+        $cents = $this->parseCurrencyItem($request, 'cent');
         // Get the total of the operation (in cents).
         $total = $this->getTotal($notes, $coins, $cents);
 
@@ -157,7 +157,7 @@ class OperationController extends Controller
         //
     }
 
-    private function parseCurrency($request, $type)
+    private function parseCurrencyItem($request, $type)
     {
         $results = [];
 
