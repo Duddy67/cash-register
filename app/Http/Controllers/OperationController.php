@@ -7,6 +7,7 @@ use App\Models\Operation;
 use App\Models\Note;
 use App\Models\Coin;
 use App\Models\Cent;
+use Carbon\Carbon;
 
 class OperationController extends Controller
 {
@@ -99,7 +100,8 @@ class OperationController extends Controller
         $page = 'operation';
         // Convert in cents.
         $total = $operation->total / 100;
-        return view('index', compact('operation', 'page', 'id', 'total'));
+        $entryDate = substr($operation->entry_date, 0, 10);
+        return view('index', compact('operation', 'page', 'id', 'total', 'entryDate'));
     }
 
     /**
@@ -120,6 +122,7 @@ class OperationController extends Controller
 
         $operation = Operation::find($id);
         $operation->type = $request->input('type');
+        $operation->entry_date = Carbon::createFromFormat('!Y-m-d', $request->input('entry_date'));
         $operation->comment = $request->input('comment');
         $operation->total = $total;
         $operation->save();

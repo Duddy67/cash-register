@@ -40,7 +40,6 @@
      </div>
          <!-- JS files: jQuery first, then Bootstrap JS -->
     <script type="text/javascript" src="{{ url('/') }}/js/lang/fr.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/js/cajax.js"></script>
     <script type="text/javascript" src="{{ url('/') }}/js/crepeater.js"></script>
     <script type="text/javascript" src="{{ url('/') }}/js/operation.js"></script>
     </body>

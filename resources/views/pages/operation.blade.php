@@ -24,8 +24,9 @@
               </div>
               <div class="form-group w-100">
                   <label for="comment">Date</label>
-                  <div class="input-group date" id="datepicker">
-                    <input type="text" class="form-control">
+                  <div class="input-group date datepicker">
+                    <input type="text" class="form-control" id="datepicker" readonly="true" value="">
+                    <input type="hidden" name="entry_date" id="entry-date" value="{{ (isset($entryDate)) ? $entryDate : ''  }}" />
                     <span class="input-group-append">
                         <span class="input-group-text bg-white">
                             <i class="fa fa-calendar"></i>

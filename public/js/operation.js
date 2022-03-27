@@ -79,7 +79,25 @@
             $.fn.setTotal();
         });
 
-        $('#datepicker').datepicker();
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        }).on('hide', function(e) {
+            // Get the picked date.
+            let date = $('#datepicker').val();
+            // Convert it into MySQl format (Y-m-d).
+            date = date.split('/');
+            date = date[2]+'-'+date[1]+'-'+date[0];
+            $('#entry-date').val(date);
+        });
+
+        // Set the current entry date.
+        let entryDate = $('#entry-date').val();
+        if (entryDate) {
+            entryDate = entryDate.split('-');
+            entryDate = entryDate[2]+'/'+entryDate[1]+'/'+entryDate[0];
+            $('#datepicker').val(entryDate);
+        }
     });
 
     // CRepeater callback functions.
