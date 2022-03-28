@@ -5,7 +5,7 @@
 @php $action = (isset($operation)) ? route('operations.update', $id) : route('operations.store') @endphp
 @php $selected = 'selected=selected'; @endphp
 
-<form action="{{ $action }}" id="itemForm" method="post" enctype="multipart/form-data">
+<form action="{{ $action }}" id="operationForm" method="post" enctype="multipart/form-data">
     @csrf
 
     @if (isset($operation))
@@ -98,7 +98,14 @@
         @php $label = 'Mettre à jour'; @endphp
     @endif
 
-    <input type="submit" class="btn btn-success mt-5" value="{{ $label }}" />
+    <div class="row align-items-end">
+        <div class="col-6">
+            <input type="submit" class="btn btn-success mt-5" value="{{ $label }}" />
+        </div>
+        <div class="col-6">
+            <a href="{{ route('operations.index') }}" class="btn btn-primary">Retour liste</a>
+        </div>
+    </div>
 </form>
 
 </div>

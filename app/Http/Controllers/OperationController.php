@@ -18,9 +18,11 @@ class OperationController extends Controller
      */
     public function index()
     {
-        $operations = Operation::all();
+        $operations = Operation::orderBy('entry_date')->get();
         $page = 'operations';
-        return view('index', compact('operations', 'page'));
+        $types = ['cash_deposit' => 'Dépôt de caisse', 'delivery_in_bank' => 'Retour en banque', 'withdrawal' => 'Retrait'];
+        $totalOperations = Operation::getTotalOperations();
+        return view('index', compact('operations', 'page', 'types', 'totalOperations'));
     }
 
     /**
@@ -42,16 +44,22 @@ class OperationController extends Controller
      */
     public function store(Request $request)
     {
+        // Ensure (again) the entry date is filled.
+        $this->validate($request, [
+            'entry_date' => 'required',
+        ]);
+
         // Get the different currency parts.
         $notes = $this->parseCurrencyItem($request, 'note');
         $coins = $this->parseCurrencyItem($request, 'coin');
         $cents = $this->parseCurrencyItem($request, 'cent');
         // Get the total of the operation (in cents).
         $total = $this->getTotal($notes, $coins, $cents);
-
+        
         // Create a new operation.
         $operation = new Operation;
         $operation->type = $request->input('type');
+        $operation->entry_date = Carbon::createFromFormat('!Y-m-d', $request->input('entry_date'));
         $operation->comment = $request->input('comment');
         $operation->total = $total;
         $operation->save();
@@ -71,21 +79,7 @@ class OperationController extends Controller
             $operation->cents()->save($cent);
         }
 
-        return redirect()->route('operations.edit', $operation->id)->with('success', 'Operation successfully created.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $operation = Operation::find($id);
-        $page = 'operation';
-        $total = $operation->total / 100;
-        return view('index', compact('operation', 'page', 'id', 'total'));
+        return redirect()->route('operations.edit', $operation->id)->with('success', 'Opération créée avec succès.');
     }
 
     /**
@@ -146,7 +140,7 @@ class OperationController extends Controller
             $operation->cents()->save($cent);
         }
 
-        return redirect()->route('operations.edit', $id)->with('success', 'Operation successfully updated.');
+        return redirect()->route('operations.edit', $id)->with('success', 'Opération mise à jour avec succès.');
     }
 
     /**
@@ -157,7 +151,10 @@ class OperationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $operation = Operation::find($id);
+        //$operation->delete();
+        
+        return redirect()->route('operations.index')->with('success', 'Opération supprimée avec succès.');
     }
 
     private function parseCurrencyItem($request, $type)

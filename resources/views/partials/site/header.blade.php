@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-          <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="{{ url('/posts') }}" class="nav-link">Posts</a></li>
+          <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="{{ url('/operations') }}" class="nav-link">Opérations</a></li>
             @auth
-                <li class="nav-item"><a href="{{ url('/posts/create') }}" class="nav-link">Create Post</a></li>
+                <li class="nav-item"><a href="{{ url('/operations/create') }}" class="nav-link">Créé une opération</a></li>
             @endauth
       </ul>
       </div>

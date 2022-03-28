@@ -47,6 +47,7 @@
             });
         
             $.fn.setSubTotal('cent');
+            $.fn.setTotal();
         }
         // Create a new operation. 
         else {
@@ -98,6 +99,17 @@
             entryDate = entryDate[2]+'/'+entryDate[1]+'/'+entryDate[0];
             $('#datepicker').val(entryDate);
         }
+
+        $(document).on('submit', '#operationForm', function(event) {
+            // Ensure the entry date is filled.
+            if ($('#entry-date').val() == '') {
+                $('.datepicker').css('border', '1px solid red');
+                event.preventDefault();
+                event.stopPropagation();
+
+                alert('Le champ date est obligatoire');
+            }
+        });
     });
 
     // CRepeater callback functions.

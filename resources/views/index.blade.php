@@ -31,6 +31,14 @@
 	 <section id="layout-content" class="pt-4">
         @include ('layouts.flash-messages')
         @include('pages.'.$page)
+
+        @if ($page == 'operation') 
+            <script type="text/javascript" src="{{ url('/') }}/js/lang/fr.js"></script>
+            <script type="text/javascript" src="{{ url('/') }}/js/crepeater.js"></script>
+            <script type="text/javascript" src="{{ url('/') }}/js/operation.js"></script>
+        @elseif ($page == 'operations') 
+            <script type="text/javascript" src="{{ url('/') }}/js/operations.js"></script>
+        @endif
 	 </section>
 
 	 <!-- Footer -->
@@ -38,9 +46,5 @@
         @include('partials.site.footer')
 	 </footer>
      </div>
-         <!-- JS files: jQuery first, then Bootstrap JS -->
-    <script type="text/javascript" src="{{ url('/') }}/js/lang/fr.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/js/crepeater.js"></script>
-    <script type="text/javascript" src="{{ url('/') }}/js/operation.js"></script>
     </body>
 </html>

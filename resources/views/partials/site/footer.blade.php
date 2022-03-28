@@ -6,7 +6,7 @@
     <div class="row">
 
       <!-- Grid column -->
-      <div class="col-md-8 mt-md-0 mt-3">
+      <div class="col-md-12 mt-md-0 mt-3">
 
         <!-- Content -->
         <h5 class="font-weight-bold">Footer Content</h5>
@@ -16,32 +16,6 @@
       <!-- Grid column -->
 
       <hr class="clearfix w-100 d-md-none pb-3">
-
-      <!-- Grid column -->
-      <div class="col-md-2 mb-md-0 mb-3">
-
-        <!-- Links -->
-        <h6 class="font-weight-bold">Posts</h6>
-
-        <ul class="list-unstyled footer-posts">
-          <li>
-            <a href="#!">The outsider</a>
-          </li>
-          <li>
-            <a href="#!">Alice in wonderland</a>
-          </li>
-          <li>
-            <a href="#!">In cold blood</a>
-          </li>
-          <li>
-            <a href="#!">1984</a>
-          </li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-    </div>
     <!-- Grid row -->
 
   </div>
