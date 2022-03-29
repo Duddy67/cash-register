@@ -47,7 +47,7 @@
             });
         
             $.fn.setSubTotal('cent');
-            $.fn.setTotal();
+            $.fn.setTotalAmount();
         }
         // Create a new operation. 
         else {
@@ -70,14 +70,14 @@
             // Get the currency item from the element id.
             const currencyItem = $(this).attr('id').split('-')[0];
             $.fn.setSubTotal(currencyItem);
-            $.fn.setTotal();
+            $.fn.setTotalAmount();
         });
 
         $(document).on('change', '[id*="-numeral-"]', function(event) {
             // Get the currency item from the element id.
             const currencyItem = $(this).attr('id').split('-')[0];
             $.fn.setSubTotal(currencyItem);
-            $.fn.setTotal();
+            $.fn.setTotalAmount();
         });
 
         $('.datepicker').datepicker({
@@ -101,7 +101,7 @@
         }
 
         $(document).on('submit', '#operationForm', function(event) {
-            // Ensure the entry date is filled.
+            // Ensure the entry date field is filled out.
             if ($('#entry-date').val() == '') {
                 $('.datepicker').css('border', '1px solid red');
                 event.preventDefault();
@@ -147,7 +147,7 @@
     afterRemoveItem = function(idNb, itemType) {
         // Reset the subtotal and total values.
         $.fn.setSubTotal(itemType);
-        $.fn.setTotal();
+        $.fn.setTotalAmount();
     }
 
     $.fn.buildItem = function(item, idNb, data, numerals) {
@@ -207,7 +207,7 @@
         $('#'+currencyItem+'-subtotal').text(subTotal);
     }
 
-    $.fn.setTotal = function() {
+    $.fn.setTotalAmount = function() {
         let total = 0;
         const currencyItems = ['note', 'coin', 'cent'];
 
@@ -222,7 +222,7 @@
 
         total = total / 100;
         
-        $('#operation-total').text($.fn.zeroPadding(total));
+        $('#total-amount').text($.fn.zeroPadding(total));
     }
 
     // Possibly adds an extra zero after the first cent unit (if any).

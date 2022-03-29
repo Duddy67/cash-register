@@ -40,7 +40,7 @@
               </div>
           </div>
           <div class="col-4">
-              <div class="h1"><span id="operation-total">{{ (isset($total)) ? $total : 0 }}</span> E</div>
+              <div class="h1"><span id="total-amount">{{ (isset($amount)) ? $amount: 0 }}</span> E</div>
           </div>
     </div>
 

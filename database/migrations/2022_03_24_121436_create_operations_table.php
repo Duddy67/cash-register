@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('type', 20);
             $table->text('comment')->nullable();
             $table->timestamp('entry_date')->nullable();
-            $table->bigInteger('total')->unsigned();
+            $table->bigInteger('amount')->unsigned();
             $table->timestamps();
         });
     }

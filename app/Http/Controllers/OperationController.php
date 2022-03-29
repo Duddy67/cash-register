@@ -18,7 +18,7 @@ class OperationController extends Controller
      */
     public function index()
     {
-        $operations = Operation::orderBy('entry_date')->get();
+        $operations = Operation::orderBy('entry_date', 'desc')->get();
         $page = 'operations';
         $types = ['cash_deposit' => 'Dépôt de caisse', 'delivery_in_bank' => 'Retour en banque', 'withdrawal' => 'Retrait'];
         $totalOperations = Operation::getTotalOperations();
@@ -44,40 +44,27 @@ class OperationController extends Controller
      */
     public function store(Request $request)
     {
-        // Ensure (again) the entry date is filled.
+        // Ensure (again) the entry date field is filled out.
         $this->validate($request, [
             'entry_date' => 'required',
         ]);
 
-        // Get the different currency parts.
+        // Get the currency items.
         $notes = $this->parseCurrencyItem($request, 'note');
         $coins = $this->parseCurrencyItem($request, 'coin');
         $cents = $this->parseCurrencyItem($request, 'cent');
-        // Get the total of the operation (in cents).
-        $total = $this->getTotal($notes, $coins, $cents);
+        // Get the amount of the operation (in cents).
+        $amount = $this->getAmount($notes, $coins, $cents);
         
         // Create a new operation.
         $operation = new Operation;
         $operation->type = $request->input('type');
         $operation->entry_date = Carbon::createFromFormat('!Y-m-d', $request->input('entry_date'));
         $operation->comment = $request->input('comment');
-        $operation->total = $total;
+        $operation->amount = $amount;
         $operation->save();
 
-        foreach ($notes as $note) {
-            $note = new Note($note);
-            $operation->notes()->save($note);
-        }
-
-        foreach ($coins as $coin) {
-            $coin = new Coin($coin);
-            $operation->coins()->save($coin);
-        }
-
-        foreach ($cents as $cent) {
-            $cent = new Cent($cent);
-            $operation->cents()->save($cent);
-        }
+        $operation->setCurrencyItems($notes, $coins, $cents);
 
         return redirect()->route('operations.edit', $operation->id)->with('success', 'Opération créée avec succès.');
     }
@@ -93,9 +80,9 @@ class OperationController extends Controller
         $operation = Operation::find($id);
         $page = 'operation';
         // Convert in cents.
-        $total = $operation->total / 100;
+        $amount = $operation->amount / 100;
         $entryDate = substr($operation->entry_date, 0, 10);
-        return view('index', compact('operation', 'page', 'id', 'total', 'entryDate'));
+        return view('index', compact('operation', 'page', 'id', 'amount', 'entryDate'));
     }
 
     /**
@@ -107,38 +94,27 @@ class OperationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Get the different currency parts.
+        // Get the currency items.
         $notes = $this->parseCurrencyItem($request, 'note');
         $coins = $this->parseCurrencyItem($request, 'coin');
         $cents = $this->parseCurrencyItem($request, 'cent');
-        // Get the total of the operation (in cents).
-        $total = $this->getTotal($notes, $coins, $cents);
+        // Get the amount of the operation (in cents).
+        $amount = $this->getAmount($notes, $coins, $cents);
 
+        // Update the operation.
         $operation = Operation::find($id);
         $operation->type = $request->input('type');
         $operation->entry_date = Carbon::createFromFormat('!Y-m-d', $request->input('entry_date'));
         $operation->comment = $request->input('comment');
-        $operation->total = $total;
+        $operation->amount = $amount;
         $operation->save();
 
+        // Reset the currency items.
         $operation->notes()->delete();
         $operation->coins()->delete();
         $operation->cents()->delete();
 
-        foreach ($notes as $note) {
-            $note = new Note($note);
-            $operation->notes()->save($note);
-        }
-
-        foreach ($coins as $coin) {
-            $coin = new Coin($coin);
-            $operation->coins()->save($coin);
-        }
-
-        foreach ($cents as $cent) {
-            $cent = new Cent($cent);
-            $operation->cents()->save($cent);
-        }
+        $operation->setCurrencyItems($notes, $coins, $cents);
 
         return redirect()->route('operations.edit', $id)->with('success', 'Opération mise à jour avec succès.');
     }
@@ -174,26 +150,26 @@ class OperationController extends Controller
         return $results;
     }
 
-    private function getTotal($notes, $coins, $cents)
+    private function getAmount($notes, $coins, $cents)
     {
-        $total = 0;
+        $amount = 0;
 
         foreach ($notes as $note) {
-            $total += $note['numeral'] * $note['quantity'];
+            $amount += $note['numeral'] * $note['quantity'];
         }
 
         foreach ($coins as $coin) {
-            $total += $coin['numeral'] * $coin['quantity'];
+            $amount += $coin['numeral'] * $coin['quantity'];
         }
 
-        // Convert total in cents.
-        $total = $total * 100;
+        // Convert amount in cents.
+        $amount = $amount * 100;
 
         // Append the cents
         foreach ($cents as $cent) {
-            $total += $cent['numeral'] * $cent['quantity'];
+            $amount += $cent['numeral'] * $cent['quantity'];
         }
 
-        return $total;
+        return $amount;
     }
 }

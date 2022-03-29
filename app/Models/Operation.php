@@ -53,21 +53,40 @@ class Operation extends Model
         parent::delete();
     }
 
-    public function getDailyTotal()
+    public function setCurrencyItems($notes, $coins, $cents)
+    {
+        foreach ($notes as $note) {
+            $note = new Note($note);
+            $this->notes()->save($note);
+        }
+
+        foreach ($coins as $coin) {
+            $coin = new Coin($coin);
+            $this->coins()->save($coin);
+        }
+
+        foreach ($cents as $cent) {
+            $cent = new Cent($cent);
+            $this->cents()->save($cent);
+        }
+    }
+
+    public function getDailyAmount()
     {
         return Operation::getTotalOperations($this->entry_date);
     }
 
     /**
-     * Compute the total operations or the daily total 
-     * operations if the $entryDate parameter is provided.
+     * Compute the total operations or the daily amount
+     * if the $entryDate parameter is set.
      *
      * @return integer 
      */
     public static function getTotalOperations($entryDate = null)
     {
-        $query = DB::table('operations')->select('type', 'total');
+        $query = DB::table('operations')->select('type', 'amount');
 
+        // Get the daily amount of the operations.
         if ($entryDate !== null) {
             $query->where('entry_date', $entryDate);
         }
@@ -78,10 +97,10 @@ class Operation extends Model
 
         foreach ($operations as $operation) {
             if ($operation->type == 'cash_deposit') {
-                $total += $operation->total;
+                $total += $operation->amount;
             }
             else {
-                $total -= $operation->total;
+                $total -= $operation->amount;
             }
         }
 
