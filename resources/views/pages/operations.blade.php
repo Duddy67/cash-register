@@ -1,6 +1,6 @@
 <a href="{{ route('operations.create') }}" class="btn btn-primary">Nouvelle opération</a>
 
-@if (empty($operations)) 
+@if (!count($operations)) 
     <div class="alert alert-info mt-5" role="alert">
         Aucune opération n'a été trouvée.
     </div>
