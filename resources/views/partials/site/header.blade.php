@@ -2,10 +2,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">Accueil</a></li>
-          <li class="nav-item"><a href="{{ url('/operations') }}" class="nav-link">Opérations</a></li>
-            @auth
-                <li class="nav-item"><a href="{{ url('/operations/create') }}" class="nav-link">Créé une opération</a></li>
-            @endauth
+          @auth
+            <li class="nav-item"><a href="{{ url('/operations') }}" class="nav-link">Opérations</a></li>
+            <li class="nav-item"><a href="{{ url('/operations/create') }}" class="nav-link">Créer une opération</a></li>
+          @endauth
       </ul>
       </div>
 

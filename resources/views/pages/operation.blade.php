@@ -1,6 +1,5 @@
-<h1>Entrée de fond de caisse</h1>
+<h3 class="mb-5 border-3 border-bottom">Entrée de fond de caisse</h3>
 
-<div class="container">
 
 @php $action = (isset($operation)) ? route('operations.update', $id) : route('operations.store') @endphp
 @php $selected = 'selected=selected'; @endphp
@@ -40,12 +39,12 @@
               </div>
           </div>
           <div class="col-4">
-              <div class="h1"><span id="total-amount">{{ (isset($amount)) ? $amount: 0 }}</span> E</div>
+              <div class="h1 pull-right"><span id="total-amount">{{ (isset($amount)) ? $amount: 0 }}</span> €</div>
           </div>
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 border-3 border-bottom mt-4 mb-4">
           <h3>Billets</h3>
         </div>
 
@@ -55,12 +54,12 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="h1"><span id="note-subtotal">0</span> E</div>
+            <div class="h2 pull-right"><span id="note-subtotal">0</span> €</div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 border-3 border-bottom mt-5 mb-4">
           <h3>Pièces</h3>
         </div>
 
@@ -70,12 +69,12 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="h1"><span id="coin-subtotal">0</span> E</div>
+            <div class="h2 pull-right"><span id="coin-subtotal">0</span> €</div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 border-3 border-bottom mt-5 mb-4">
           <h3>Centimes</h3>
         </div>
 
@@ -85,7 +84,7 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="h1"><span id="cent-subtotal">0</span> E</div>
+            <div class="h2 pull-right"><span id="cent-subtotal">0</span> €</div>
         </div>
     </div>
 
@@ -107,5 +106,3 @@
         </div>
     </div>
 </form>
-
-</div>

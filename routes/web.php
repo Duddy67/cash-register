@@ -15,10 +15,13 @@ use App\Http\Controllers\OperationController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $page = 'home';
+    return view('index', compact('page'));
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
+//Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('operations', OperationController::class)->except(['show']);
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('operations', OperationController::class)->except(['show']);
+});

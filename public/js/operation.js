@@ -32,21 +32,40 @@
                 note.createItem(elem);
             });
 
-            $.fn.setSubTotal('note');
+            if (data.length > 0) {
+                $.fn.setSubTotal('note');
+            }
+            // This type of currency item hasn't been set for this operation.
+            else {
+                // Create a default currency item.
+                cent.createItem();
+            }
         
             data = JSON.parse($('#coin_data').val());
             data.forEach(elem => {
                 coin.createItem(elem);
             });
-        
-            $.fn.setSubTotal('coin');
+
+            if (data.length > 0) {
+                $.fn.setSubTotal('coin');
+            }
+            else {
+                cent.createItem();
+            }
 
             data = JSON.parse($('#cent_data').val());
+            
             data.forEach(elem => {
                 cent.createItem(elem);
             });
-        
-            $.fn.setSubTotal('cent');
+
+            if (data.length > 0) {
+                $.fn.setSubTotal('cent');
+            }
+            else {
+                cent.createItem();
+            }
+
             $.fn.setTotalAmount();
         }
         // Create a new operation. 
@@ -184,7 +203,6 @@
     $.fn.getSubTotal = function(currencyItem) {
         let subTotal = 0;
         $('[id^="'+currencyItem+'-numeral-"]').each(function() {
-
             // Skip the label tags.
             if ($(this).val() != '') {
                 const idNb = $(this).attr('id').split('-')[2];
@@ -201,10 +219,9 @@
         if (currencyItem == 'cent') {
             // Convert in decimal value.
             subTotal = subTotal / 100;
-            subTotal = $.fn.zeroPadding(subTotal);
         }
 
-        $('#'+currencyItem+'-subtotal').text(subTotal);
+        $('#'+currencyItem+'-subtotal').text($.fn.zeroPadding(subTotal));
     }
 
     $.fn.setTotalAmount = function() {
@@ -225,13 +242,19 @@
         $('#total-amount').text($.fn.zeroPadding(total));
     }
 
-    // Possibly adds an extra zero after the first cent unit (if any).
+    /* Possibly adds an extra zero after the first cent unit 
+     * or a dot and 2 zeros after integer numbers.
+     */
     $.fn.zeroPadding = function(number) {
         number = String(number);
         decimal = number.split('.')[1];
 
         if (decimal !== undefined && decimal.length == 1) {
             return number+'0';
+        }
+
+        if (decimal === undefined) {
+            return number+'.00';
         }
 
         return number;

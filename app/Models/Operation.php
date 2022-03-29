@@ -80,7 +80,7 @@ class Operation extends Model
      * Compute the total operations or the daily amount
      * if the $entryDate parameter is set.
      *
-     * @return integer 
+     * @return signed integer 
      */
     public static function getTotalOperations($entryDate = null)
     {
@@ -105,5 +105,24 @@ class Operation extends Model
         }
 
         return $total;
+    }
+
+    /* 
+     * Possibly adds an extra zero after the first cent unit 
+     * or a dot and 2 zeros after integer numbers.
+     */
+    public static function zeroPadding($number)
+    {
+        $number = strval($number);
+
+        if (preg_match('#\.[0-9]{1}$#', $number)) {
+            return $number.'0';
+        }
+
+        if (!preg_match('#\.#', $number)) {
+            return $number.'.00';
+        }
+
+        return $number;
     }
 }
