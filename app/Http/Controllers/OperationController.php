@@ -55,6 +55,10 @@ class OperationController extends Controller
         $cents = $this->parseCurrencyItem($request, 'cent');
         // Get the amount of the operation (in cents).
         $amount = $this->getAmount($notes, $coins, $cents);
+
+        if (empty($amount)) {
+            return redirect()->route('operations.create')->with('error', 'Merci de renseigner au moins un des champs: Billets, Pièces ou Centimes.');
+        }
         
         // Create a new operation.
         $operation = new Operation;
@@ -77,7 +81,7 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        $operation = Operation::find($id);
+        $operation = Operation::findOrFail($id);
         $page = 'operation';
         // Convert in cents.
         $amount = $operation->amount / 100;
@@ -101,8 +105,12 @@ class OperationController extends Controller
         // Get the amount of the operation (in cents).
         $amount = $this->getAmount($notes, $coins, $cents);
 
+        if (empty($amount)) {
+            return redirect()->route('operations.create')->with('error', 'Merci de renseigner au moins un des champs: Billets, Pièces ou Centimes.');
+        }
+
         // Update the operation.
-        $operation = Operation::find($id);
+        $operation = Operation::findOrFail($id);
         $operation->type = $request->input('type');
         $operation->entry_date = Carbon::createFromFormat('!Y-m-d', $request->input('entry_date'));
         $operation->comment = $request->input('comment');
@@ -127,8 +135,8 @@ class OperationController extends Controller
      */
     public function destroy($id)
     {
-        $operation = Operation::find($id);
-        //$operation->delete();
+        $operation = Operation::findOrFail($id);
+        $operation->delete();
         
         return redirect()->route('operations.index')->with('success', 'Opération supprimée avec succès.');
     }

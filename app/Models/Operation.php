@@ -46,9 +46,10 @@ class Operation extends Model
      */
     public function delete()
     {
-        $this->notes->delete();
-        $this->coins->delete();
-        $this->cents->delete();
+        // First delete the relationships.
+        $this->notes()->delete();
+        $this->coins()->delete();
+        $this->cents()->delete();
 
         parent::delete();
     }
