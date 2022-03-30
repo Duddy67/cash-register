@@ -27,5 +27,33 @@ N.B: Ne sachant pas exactement comment la caisse est gérée j'ai laissé la pos
 
 # CRepeater   
 Le repeater utilisé pour les ajouts et suppressions des items de monnaie est une mini librairie que j'ai moi-même développé en Vanilla JS. 
-Cette librairie est disponible ici: https://github.com/Duddy67/crepeater
+Cette librairie est disponible ici: https://github.com/Duddy67/crepeater  
+
+# Installation
+
+Le répertoire ne contient que les fichiers nécessaires au projet de test, il ne contient pas tout le framework Laravel.  
+*L'application est compatible avec Laravel 8/9*  
+Pour installer l'application sur un serveur:  
+```
+composer create-project laravel/laravel myproject
+
+cd myproject 
+
+composer require laravel/ui --dev
+
+php artisan ui:auth
+
+rm README.md
+rm routes/web.php
+
+git init .
+git remote add origin git@github.com:Duddy67/cash-register.git
+
+git pull origin main
+
+php artisan migrate
+```
+*(passwd: secret)*
+
+
 
