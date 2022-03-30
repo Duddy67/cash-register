@@ -24,4 +24,5 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('operations', OperationController::class)->except(['show']);
+    Route::delete('/operations', [OperationController::class, 'massDestroy'])->name('operations.massDestroy');
 });

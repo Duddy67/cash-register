@@ -18,6 +18,20 @@
             // Delete the operation.
             form.submit();
         });
+    
+        $(document).on('click', '[id^="delete-daily-operations-"]', function(event) {
+
+            if (confirm('Vous êtes sur le point de supprimer une opération journalière. Etes vous sûr(e) ?') === false) {
+                return;
+            }
+
+            event.preventDefault();
+            // Set the operation entry date for deletion.
+	    $('#entry-date').val($(this).attr('data-entry-date'));
+            const form = $('#deleteDailyOperations');
+            // Delete the daily operations.
+            form.submit();
+        });
     });
 
   })(jQuery);

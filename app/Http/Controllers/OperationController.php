@@ -141,6 +141,21 @@ class OperationController extends Controller
         return redirect()->route('operations.index')->with('success', 'Opération supprimée avec succès.');
     }
 
+    /**
+     * Removes daily operations from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return Response
+     */
+    public function massDestroy(Request $request)
+    {
+	Operation::where('entry_date', $request->input('entry_date'))->each(function ($operation, $key) {
+            $operation->delete();
+        });
+
+        return redirect()->route('operations.index')->with('success', 'Opération du jour supprimée avec succès.');
+    }
+
     private function parseCurrencyItem($request, $type)
     {
         $results = [];
