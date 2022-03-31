@@ -6,7 +6,7 @@ https://codalia.net/cash_register/
 login: admin@cashregister.com  
 passwd: mysecret
 
-# Notes et remarques.
+# Remarques et commentaires.
 
 Il y a une légère incohérence dans l'énoncé concernant la page de type dashboard.
 En effet, l'énoncé et le screenshot sont en contradiction:
@@ -26,7 +26,7 @@ N.B: Ne sachant pas exactement comment la caisse est gérée j'ai laissé la pos
 
 
 # CRepeater   
-Le repeater utilisé pour les ajouts et suppressions des items de monnaie est une mini librairie que j'ai moi-même développé en Vanilla JS. 
+Le repeater utilisé pour les ajouts et suppressions des items de monnaie est une mini librairie que j'ai moi-même développé en Javascript. 
 Cette librairie est disponible ici: https://github.com/Duddy67/crepeater  
 
 # Installation
@@ -43,8 +43,7 @@ composer require laravel/ui --dev
 
 php artisan ui:auth
 
-rm README.md
-rm routes/web.php
+rm README.md routes/web.php resources/views/layouts/app.blade.php resources/views/auth/login.blade.php
 
 git init .
 git remote add origin git@github.com:Duddy67/cash-register.git
