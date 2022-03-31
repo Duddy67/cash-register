@@ -30,29 +30,14 @@ Le repeater utilisé pour les ajouts et suppressions des items de monnaie est un
 Cette librairie est disponible ici: https://github.com/Duddy67/crepeater  
 
 # Installation
-
-Le répertoire ne contient que les fichiers nécessaires au projet de test, il ne contient pas tout le framework Laravel.  
-*L'application est compatible avec Laravel 8/9*  
-Pour installer l'application sur un serveur:  
 ```
-composer create-project laravel/laravel myproject
+git clone git@github.com:Duddy67/cash-register.git
 
-cd myproject 
+cd cash-register
 
-composer require laravel/ui --dev
-
-php artisan ui:auth
-
-rm README.md routes/web.php resources/views/layouts/app.blade.php resources/views/auth/login.blade.php
-
-git init .
-git remote add origin git@github.com:Duddy67/cash-register.git
-
-git pull origin main
+composer install
 
 php artisan migrate
 ```
 *(passwd: secret)*
-
-
 
