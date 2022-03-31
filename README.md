@@ -1,7 +1,7 @@
 # Cash Register
 
 Vous pouvez accéder à l'application de test à l'adresse suivante:
-https://codalia.net/cash_register/
+https://codalia.net/cash_register/public/
 
 login: admin@cashregister.com  
 passwd: mysecret

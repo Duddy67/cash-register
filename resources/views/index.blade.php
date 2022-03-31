@@ -14,7 +14,6 @@
         <!-- Styles -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
         <!-- App CSS file -->
         <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -33,11 +32,11 @@
         @include('pages.'.$page)
 
         @if ($page == 'operation') 
-            <script type="text/javascript" src="{{ url('/') }}/js/lang/fr.js"></script>
-            <script type="text/javascript" src="{{ url('/') }}/js/crepeater.js"></script>
-            <script type="text/javascript" src="{{ url('/') }}/js/operation.js"></script>
+            <script type="text/javascript" src="{{ asset('/js/lang/fr.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('/js/crepeater.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('/js/operation.js') }}"></script>
         @elseif ($page == 'operations') 
-            <script type="text/javascript" src="{{ url('/') }}/js/operations.js"></script>
+            <script type="text/javascript" src="{{ asset('/js/operations.js') }}"></script>
         @endif
 	 </section>
 
